@@ -6,18 +6,25 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 {
     selector: 'ng-select-basic-dialog-popup',
     templateUrl: 'basicDialogPopup.component.html',
+    styleUrls: ['basicDialogPopup.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BasicDialogPopupComponent implements DialogPopupContentComponent<any>
 {
-    options: any;
+    selectOptions: any;
+
+    templateGatherer: any;
+
+    optionClick: any;
 
     //######################### constructor #########################
     constructor(public dialog: MatDialogRef<BasicDialogPopupComponent, DialogPopupComponentData<any>>,
         @Inject(MAT_DIALOG_DATA) public data: DialogPopupComponentData<any>)
     {
-        this.options = data.options;
+        this.selectOptions = data.options;
+        this.templateGatherer = data.templateGatherer;
+        this.optionClick = data.optionClick;
 
-        console.log(this.options);
+        console.log(this.selectOptions);
     }
 }

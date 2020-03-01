@@ -4,7 +4,7 @@ import {NgSelectPluginGeneric, OptionsGatherer, NormalState, KeyboardHandler, Va
 import {Subscription} from "rxjs";
 import {extend} from "jquery";
 import {DOCUMENT} from "@angular/common";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {BasicDialogPopupComponent} from "./basicDialogPopup.component";
 
 /**
@@ -91,6 +91,11 @@ export class DialogPopupComponent implements DialogPopup, NgSelectPluginGeneric<
      * Component that is used for handling metadata selection itself
      */
     protected _dialogComponent?: Type<DialogPopupContentComponent<any>>;
+
+    /**
+     * Popup dialog reference
+     */
+    protected _dialogRef?: MatDialogRef<any>;
 
     //######################### public properties - implementation of BasicPopup #########################
 
@@ -254,7 +259,7 @@ export class DialogPopupComponent implements DialogPopup, NgSelectPluginGeneric<
         {
             this._keyboardHandler = keyboardHandler;
 
-            this._khPopupVisibilityRequestSubscription = this._keyboardHandler.popupVisibilityRequest.subscribe(this._showDialog);
+            this._khPopupVisibilityRequestSubscription = this._keyboardHandler.popupVisibilityRequest.subscribe(this._handleDialog);
         }
 
         let valueHandler = this.ngSelectPlugins[VALUE_HANDLER] as ValueHandler<any>;
@@ -271,7 +276,7 @@ export class DialogPopupComponent implements DialogPopup, NgSelectPluginGeneric<
         {
             this._valueHandler = valueHandler;
 
-            this._vhPopupVisibilityRequestSubscription = this._valueHandler.popupVisibilityRequest.subscribe(this._showDialog);
+            this._vhPopupVisibilityRequestSubscription = this._valueHandler.popupVisibilityRequest.subscribe(this._handleDialog);
         }
 
         this.loadOptions();
@@ -308,21 +313,30 @@ export class DialogPopupComponent implements DialogPopup, NgSelectPluginGeneric<
      */
     protected togglePopup()
     {
-        this._showDialog();
+        this._handleDialog(true);
     }
 
     /**
      * Handles visibility change
      */
-    protected _showDialog = () =>
+    protected _handleDialog = (visible: boolean) =>
     {
-        console.log(this._optionsGatherer.availableOptions);
-        this._dialog.open(this._dialogComponent,
-            {
-                data: 
+        if (visible)
+        {
+            this._dialogRef = this._dialog.open(this._dialogComponent,
                 {
-                    options: this.selectOptions
-                }
-            });
+                    data: 
+                    {
+                        options: this.selectOptions,
+                        templateGatherer: this.templateGatherer,
+                        optionClick: this.optionClick
+                    }
+                });
+        }
+        else
+        {
+            this._dialogRef?.close();
+            this._dialogRef = null;
+        }
     };
 }

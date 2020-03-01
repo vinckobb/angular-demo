@@ -47,6 +47,10 @@ export interface DialogPopup extends Popup
 export interface DialogPopupComponentData<T>
 {
     options: any;
+
+    templateGatherer: any;
+
+    optionClick: any;
 }
 
 /**
