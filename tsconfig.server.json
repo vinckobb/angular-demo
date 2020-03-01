@@ -1,0 +1,17 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions":
+    {
+        "outDir": ""
+    },
+    "exclude":
+    [
+        "node_modules"
+    ],
+    "angularCompilerOptions":
+    {
+        "enableIvy": true,
+        "fullTemplateTypeCheck": false,
+        "strictTemplates": false
+    }
+}

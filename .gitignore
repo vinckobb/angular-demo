@@ -1,0 +1,14 @@
+.idea/
+node_modules/
+wwwroot/
+app.aot/
+build/
+testResults/
+package-lock.json
+**/config/version.json
+proxyUrl.js
+*.log
+*.bak
+*.orig
+*.pdf
+*~
