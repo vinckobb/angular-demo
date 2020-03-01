@@ -1,13 +1,10 @@
-import {Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "@anglr/authentication";
 import {TranslateService} from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
 import * as global from 'config/global';
 import * as version from 'config/version';
-
-import {ConfigReleaseService} from "../../services/api/configRelease/configRelease.service";
-import {ConfigReleaseData} from "../../services/api/configRelease/configRelease.interface";
 
 /**
  * Navigation component containing navigation menu
@@ -16,8 +13,7 @@ import {ConfigReleaseData} from "../../services/api/configRelease/configRelease.
 {
     selector: 'nav',
     templateUrl: 'navigation.component.html',
-    providers: [ConfigReleaseService],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    providers: []
 })
 export class NavigationComponent implements OnInit, OnDestroy
 {
@@ -56,11 +52,6 @@ export class NavigationComponent implements OnInit, OnDestroy
     public updateAvailable: boolean = false;
 
     /**
-     * Instance of config object
-     */
-    public config: ConfigReleaseData = null;
-
-    /**
      * Logged user full name
      */
     public fullName: string = "";
@@ -76,17 +67,12 @@ export class NavigationComponent implements OnInit, OnDestroy
     public guiVersion: string = `Universal: ${version.version}`;
 
     //######################### constructor #########################
-    constructor(private _configReleaseService: ConfigReleaseService,
-                private _authService: AuthenticationService<any>,
+    constructor(private _authService: AuthenticationService<any>,
                 private _router: Router,
                 private translate: TranslateService,
-                private _changeDetector: ChangeDetectorRef,
                 // @Inject(APP_STABLE) private _appStablePromise: Promise<void>,
                 )
     {
-        this._navigationSubscription = this._router
-            .events
-            .subscribe(itm => this._changeDetector.detectChanges());
     }
 
     //######################### public methods - implementation of OnInit #########################
@@ -96,24 +82,6 @@ export class NavigationComponent implements OnInit, OnDestroy
      */
     public ngOnInit()
     {
-        // if(this._isBrowser && this._update.isEnabled)
-        // {
-        //     this._update.activated.subscribe(() => window.location.reload());
-        //     this._update.available.subscribe(() =>
-        //     { 
-        //         this.updateAvailable = true;
-        //         this._changeDetector.detectChanges();
-        //     });
-
-        //     this._appStablePromise.then(() =>
-        //     {
-        //         this._update.checkForUpdate();
-
-        //         this._updateCheckSubscription = interval(3600000)
-        //             .subscribe(() => this._update.checkForUpdate());
-        //     });
-        // }
-
         this.translate.onLangChange.subscribe(itm =>
         {
             this.activeLang = itm.lang;
@@ -126,7 +94,6 @@ export class NavigationComponent implements OnInit, OnDestroy
                 if(userIdentity.isAuthenticated)
                 {
                     this.fullName = `${userIdentity.firstName} ${userIdentity.surname}`;
-                    this._changeDetector.detectChanges();
                 }
             });
 
@@ -137,20 +104,12 @@ export class NavigationComponent implements OnInit, OnDestroy
                 if(userIdentity.isAuthenticated)
                 {
                     this.fullName = `${userIdentity.firstName} ${userIdentity.surname}`;
-                    this._changeDetector.detectChanges();
                 }
                 else
                 {
                     this.fullName = '';
-                    this._changeDetector.detectChanges();
                 }
             });
-        
-        this._configReleaseService.get().subscribe(data =>
-        {
-            this.config = data;
-            this._changeDetector.detectChanges();
-        });
     }
 
     //######################### public methods - implementation of OnDestroy #########################
@@ -186,10 +145,6 @@ export class NavigationComponent implements OnInit, OnDestroy
      */
     public activateUpdate()
     {
-        // if(this._isBrowser)
-        // {
-        //     this._update.activateUpdate();
-        // }
     }
 
     /**
@@ -199,7 +154,6 @@ export class NavigationComponent implements OnInit, OnDestroy
     public changeLang(lang: string)
     {
         this.translate.use(lang);
-        //this.appService.setLanguage(lang).subscribe();
     }
 
     /**
