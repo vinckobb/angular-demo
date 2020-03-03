@@ -63,7 +63,7 @@
         "@anglr/bootstrap": "7.0.0",
         "@anglr/common": "next",
         "@anglr/error-handling": "next",
-        "@anglr/grid": "7.0.0",
+        "@anglr/grid": "next",
         "@anglr/md-help": "7.0.0",
         "@anglr/notifications": "7.0.0",
         "@anglr/rest": "7.0.0",
