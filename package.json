@@ -81,7 +81,7 @@
         "form-data": "3.0.0",
         "jquery": "2.2.4",
         "jqueryui": "1.11.1",
-        "bootstrap": "3.3.7",
+        "bootstrap": "3.4.1",
         "@fortawesome/fontawesome-free": "5.10.2",
         "moment": "2.24.0",
         "eonasdan-bootstrap-datetimepicker": "4.17.47",
