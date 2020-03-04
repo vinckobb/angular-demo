@@ -9,7 +9,7 @@ import {getValue} from '@anglr/select/extensions';
 import {KodPopisValue} from '../../../misc/types';
 import {DataService} from '../../../services/api/data/data.service';
 import {CustomReadonlyStateComponent} from '../grid/customReadonlyState.component';
-import {DialogPopupComponent} from '../../../modules/select/plugins/popup/dialog/dialogPopup.component';
+import {DialogPopupComponent} from '@anglr/select/material';
 
 /**
  * Select samples component

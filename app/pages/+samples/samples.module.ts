@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {ModuleRoutes} from '@anglr/common/router';
 import {MatDialogModule} from '@angular/material/dialog';
+import {ModuleRoutes} from '@anglr/common/router';
+import {DialogPopupModule} from '@anglr/select/material';
 
 import {sampleComponents} from './samples.component.routes';
 import {CommonSharedModule} from "../../boot/commonShared.module";
 import {TypeaheadTagsSourceDirective, TypeaheadSourceDirective} from "../../components/directives/taSources";
 import {SampleDialogComponent} from './dialog/sampleDialog.component';
-import {MaterialSelectModule} from '../../modules/materialSelect.module';
 
 @NgModule(
 {
@@ -15,7 +15,7 @@ import {MaterialSelectModule} from '../../modules/materialSelect.module';
     [
         CommonSharedModule,
         MatDialogModule,
-        MaterialSelectModule
+        DialogPopupModule
     ]
 })
 @ModuleRoutes(sampleComponents)

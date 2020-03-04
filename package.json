@@ -67,7 +67,7 @@
         "@anglr/md-help": "7.0.0",
         "@anglr/notifications": "7.0.0",
         "@anglr/rest": "7.0.0",
-        "@anglr/select": "7.0.0",
+        "@anglr/select": "next",
         "@anglr/server-stuff": "7.0.0",
         "@anglr/translate-extensions": "7.0.0",
         "@jscrpt/common": "1.1.0",
