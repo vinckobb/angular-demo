@@ -1,6 +1,6 @@
 import {Component, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {ComponentRedirectRoute, ComponentRoute} from '@anglr/common/router';
-import {GridOptions, GridComponent, SimpleOrdering, DataResponse, AsyncDataLoaderOptions, BasicPagingOptions, AdvancedMetadataSelectorComponent, AdvancedMetadataSelectorOptions, QueryPagingInitializerComponent, TableContentRendererOptions, DATA_LOADER, DataLoader, PreviousNextPagingComponent, PreviousNextPagingOptions, ContentVirtualScrollPagingComponent, ContentVirtualScrollPagingOptions, LoadMorePagingComponent, LoadMorePagingOptions, PageVirtualScrollPagingComponent, PageVirtualScrollPagingOptions, CssGridContentRendererComponent} from '@anglr/grid';
+import {GridOptions, GridComponent, SimpleOrdering, DataResponse, AsyncDataLoaderOptions, BasicPagingOptions, AdvancedMetadataSelectorComponent, AdvancedMetadataSelectorOptions, QueryPagingInitializerComponent, TableContentRendererOptions, DATA_LOADER, DataLoader, PreviousNextPagingComponent, PreviousNextPagingOptions, ContentVirtualScrollPagingComponent, ContentVirtualScrollPagingOptions, LoadMorePagingComponent, LoadMorePagingOptions, PageVirtualScrollPagingComponent, PageVirtualScrollPagingOptions, CssDivsContentRendererComponent, CssDivsBodyContentRendererOptions, CssDivsContentRendererOptions, CssDivsHeaderContentRendererOptions} from '@anglr/grid';
 import {setPage, reinitializeOptions} from '@anglr/grid/extensions';
 import {Authorize, AuthGuard} from '@anglr/authentication';
 
@@ -292,7 +292,38 @@ export class GridSampleComponent
                 },
                 contentRenderer:
                 {
-                    type: CssGridContentRendererComponent
+                    type: CssDivsContentRendererComponent,
+                    options: <CssDivsContentRendererOptions>
+                    {
+                        cssClasses:
+                        {
+                            containerDiv: 'css-subgrid-container'
+                        },
+                        plugins:
+                        {
+                            headerRenderer:
+                            {
+                                options: <CssDivsHeaderContentRendererOptions>
+                                {
+                                    cssClasses: 
+                                    {
+                                        headerDiv: 'css-subgrid-header'
+                                    }
+                                }
+                            },
+                            bodyRenderer:
+                            {
+                                options: <CssDivsBodyContentRendererOptions>
+                                {
+                                    cssClasses: 
+                                    {
+                                        bodyDiv: 'css-subgrid-body',
+                                        rowDiv: 'css-subgrid-body'
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         };
