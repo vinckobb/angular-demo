@@ -1,0 +1,25 @@
+
+<div style="width: 500px;">
+    <form (submit)="filter()" [formGroup]="form">
+        <div class="flex-row">
+            <div class="flex-1">
+                <input type="text" class="form-control" placeholder="Filter" formControlName="filter"/>
+            </div>
+            <div class="margin-md-left">
+                <button class="btn btn-primary">
+                    Filter
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="margin-md-top">
+        <ng-grid #grid [gridOptions]="gridOptions">
+            <basic-table-metadata>
+                <basic-table-column id="name" name="name" title="name"></basic-table-column>
+                <basic-table-column id="surname" name="surname" title="surname"></basic-table-column>
+                <basic-table-column id="address" name="address" title="address"></basic-table-column>
+            </basic-table-metadata>
+        </ng-grid>
+    </div>
+</div>

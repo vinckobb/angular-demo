@@ -7,6 +7,7 @@ import {sampleComponents} from './samples.component.routes';
 import {CommonSharedModule} from "../../boot/commonShared.module";
 import {TypeaheadTagsSourceDirective, TypeaheadSourceDirective} from "../../components/directives/taSources";
 import {SampleDialogComponent} from './dialog/sampleDialog.component';
+import {FilterDialogModule} from '../../modules';
 
 @NgModule(
 {
@@ -15,7 +16,8 @@ import {SampleDialogComponent} from './dialog/sampleDialog.component';
     [
         CommonSharedModule,
         MatDialogModule,
-        DialogPopupModule
+        DialogPopupModule,
+        FilterDialogModule
     ]
 })
 @ModuleRoutes(sampleComponents)
